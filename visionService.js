@@ -1,11 +1,9 @@
 const vision = require("@google-cloud/vision");
+const path = require("path");
 require("dotenv").config();
 
-// Decode the Base64 key from the environment variable
-const decodedKey = Buffer.from(process.env.GCP_KEY_BASE64, "base64").toString("utf8");
-const credentials = JSON.parse(decodedKey);
-
-// Initialize Google Cloud Vision client with credentials
-const client = new vision.ImageAnnotatorClient({ credentials });
+const client = new vision.ImageAnnotatorClient({
+  keyFilename: path.join(__dirname, "gcp-key.json"), // Update with correct filename
+});
 
 module.exports = client;
